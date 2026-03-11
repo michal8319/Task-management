@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-const Home=r
-=======
-
-
 const Home=()=>{
    return(
     <>
@@ -13,4 +8,3 @@ const Home=()=>{
    )
 }
 export default Home 
->>>>>>> c96b055c50d1da7c05d0a2d09b19643ea7643df5
