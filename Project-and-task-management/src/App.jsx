@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Home from './pages/Home'
 import  Login from './pages/Login'
-// import ProjectDetails from './pages/ProjectDetails'
+import ProjectDetails from './pages/ProjectDetails'
 import ProjectMain from './pages/ProjectMain'
 // import AddProject from './components/AddProject'
 // import CangeStatusTask from './components/CangeStatusTask'
@@ -22,7 +22,7 @@ function App() {
      
       <Router>
        <Routes>
-         <Route path="/" element={<Home />} />  
+         <Route path="/" element={<ProjectDetails />} />  
          <Route path="/Login" element={<Login/>}/> 
            {/* <Route path="/ProjectDetails" element={<ProjectDetails/>}/> */}
              <Route path="/ProjectMain" element={<ProjectMain/>}/>
