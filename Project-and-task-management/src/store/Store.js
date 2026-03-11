@@ -11,6 +11,6 @@ export const store = configureStore({
     tasks: taskReducer,
     user: userReducer,
     projectId: projectIdReducer,
-    taskId: taskIdReducer
+    taskId: taskIdReducer,
   }
 });
