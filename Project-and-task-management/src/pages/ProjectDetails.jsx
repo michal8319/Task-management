@@ -1,6 +1,8 @@
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import { useSelector } from "react-redux";
+import { useParams } from 'react-router-dom';
+import TaskCard from '../components/TaskCard';
 
 function Item(props) {
   const { sx, ...other } = props;
@@ -47,53 +49,31 @@ Item.propTypes = {
 };
 
 const ProjectDetails=()=>{
+  const {id}=useParams();
   const tasks = useSelector((state) => state.tasks);
-  const todoTasks = tasks.filter(task => task.status === "todo");
-  const progressTasks = tasks.filter(task => task.status === "in progress");
-  const doneTasks = tasks.filter(task => task.status === "done");
+  const projectTasks = tasks.filter(task => task.projectId === Number(id));
+  const backlogTasks = projectTasks.filter(task => task.status === "Backlog");
+  const progressTasks = projectTasks.filter(task => task.status === "In Progress");
+  const reviewTasks = projectTasks.filter(task => task.status === "In Review");
+  const doneTasks = projectTasks.filter(task => task.status === "Done");
     return(
         <>
-       <Box
-  sx={{
-    fontSize: "2rem",     
-    fontWeight: "bold",
-    textAlign: "center",
-    mt: 2,                 
-    mb: 4                  
-  }}
->
-  TASKS
-</Box>
-       <Box sx={{ mx: 'auto', width: 200 }}></Box>
-<Box
-  sx={{
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr 1fr",  
-    width: "100vw",                      
-    height: "80vh",
-    gap: 2
-  }}
->
-<Item>
-  To Do
-  {todoTasks.map(task => (
-    <div key={task.id}>{task.title}</div>
-  ))}
-</Item>
-<Item>
-  In Progress
-  {progressTasks.map(task => (
-    <div key={task.id}>{task.title}</div>
-  ))}
-</Item>
-<Item>
-  Done
-  {doneTasks.map(task => (
-    <div key={task.id}>{task.title}</div>
-  ))}
-</Item>
-</Box>
-        </>
+      <Box sx={{fontSize: "2rem",fontWeight: "bold",textAlign: "center",mt: 2,mb: 4}}>TASKS</Box>
+      
+      <Box sx={{ mx: 'auto', width: 200 }}></Box>
+    
+      <Box sx={{display: "grid",gridTemplateColumns: "1fr 1fr 1fr 1fr", width: "100vw",height: "80vh",gap:2}}>
+      
+      <Item>Backlog{backlogTasks.map(task => (<TaskCard key={task.id} task={task}/>))}</Item>
+
+      <Item>In Progress{progressTasks.map(task => (<TaskCard key={task.id} task={task}/>))}</Item>
+
+      <Item>In Review{reviewTasks.map(task => (<TaskCard key={task.id} task={task}/>))}</Item>
+
+      <Item>Done{doneTasks.map(task => (<TaskCard key={task.id} task={task}/>))}</Item>
+
+      </Box>
+  </>
     )
 }
 export default ProjectDetails

@@ -4,7 +4,7 @@ import { Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import ProjectCard from '../components/ProjectCard ';
 const ProjectMain=()=>{
-const projects = useSelector((state) => state.projects.projects || []);
+const projects = useSelector((state) => state.projects || []);
  return(
    <>
    <div>

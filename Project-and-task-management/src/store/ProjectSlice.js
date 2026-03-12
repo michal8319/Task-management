@@ -2,7 +2,23 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const ProjectSlice=createSlice({
     name:"projects",
-    initialState:[],
+    initialState : [
+    {
+        id: 1,
+        name: "Website Project",
+        description: "Building a company website"
+    },
+    {
+        id: 2,
+        name: "Mobile App",
+        description: "Developing a task management mobile application"
+    },
+    {
+        id: 3,
+        name: "Marketing Campaign",
+        description: "Managing the company marketing campaign"
+    }
+],
     reducers:{
         addProject:(state,action) =>
         {

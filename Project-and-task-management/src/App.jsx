@@ -13,7 +13,7 @@ import ProjectMain from './pages/ProjectMain'
 import DeleteProject from './components/DeleteProject'
 // import DeleteTask from './components/DeleteTask'
 import UpdateProject from './components/UpdateProject'
-// import UpdateTask from './components/UpdateTask'
+import UpdateTask from './components/UpdateTask'
 import ProjectCard  from './components/ProjectCard '
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -25,7 +25,7 @@ function App() {
          <Route path="/Home" element={<Home/>}/> 
          <Route path="/Login" element={<Login/>}/> 
            {/* <Route path="/ProjectDetails" element={<ProjectDetails/>}/> */}
-             <Route path="/" element={<ProjectMain/>}/>
+             <Route path="/ProjectMain" element={<ProjectMain/>}/>
              {/* <Route path="/AddProject" element={<AddProject/>}/> */}
              {/* <Route path="/CangeStatusTask" element={<CangeStatusTask/>}/>
              <Route path="/CreateProject" element={<CreateProject/>}/>
@@ -34,7 +34,7 @@ function App() {
              {/* <Route path="/DeleteTask" element={<DeleteTask/>}/> */}
              <Route path="/UpdateProject" element={<UpdateProject/>}/>
              <Route path="/ProjectCard" element={<ProjectCard/>}/>
-             {/* <Route path="/UpdateTask" element={<UpdateTask/>}/>   */}
+             <Route path="/" element={<UpdateTask/>}/>
       </Routes>
      </Router> 
   
