@@ -1,9 +1,10 @@
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
+import { useSelector } from "react-redux";
 
 function Item(props) {
   const { sx, ...other } = props;
-  return (
+  
     <Box
       sx={[
         (theme) => ({
@@ -26,7 +27,6 @@ function Item(props) {
       ]}
       {...other}
     />
-  );
 }
 
 Item.propTypes = {
@@ -43,6 +43,11 @@ Item.propTypes = {
 };
 
 const ProjectDetails=()=>{
+  const tasks = useSelector((state) => state.tasks.tasks);
+  const todoTasks = tasks.filter(task => task.status === "todo");
+  const progressTasks = tasks.filter(task => task.status === "progress");
+  const testingTasks = tasks.filter(task => task.status === "testing");
+  const doneTasks = tasks.filter(task => task.status === "done");
     return(
         <>
         <Box sx={{ mx: 'auto', width: 200 }}></Box>
@@ -52,14 +57,27 @@ const ProjectDetails=()=>{
   sx={{
     display: 'grid',
     gridAutoFlow: 'row',
-    gridTemplateColumns: 'repeat(10, 8fr)',
+    gridTemplateColumns: 'repeat(4, 1fr)',
     gridTemplateRows: 'repeat(1, 200px)',
     gap: 1,
   }}
 >
-  <Item sx={{ gridColumn: '1', gridRow: '1 / 25' }}>1</Item>
-  <Item sx={{ gridColumn: '2', gridRow: '1 / 25' }}>2</Item>
-  <Item sx={{ gridColumn: '3', gridRow: '1 / 25' }}>3</Item>
+<Item sx={{ gridColumn: '1', gridRow: '1 / 25' }}>To Do {todoTasks.map(task => (
+    <div key={task.id}>{task.title}</div>
+  ))}</Item>
+
+<Item sx={{ gridColumn: '2', gridRow: '1 / 25' }}>In Progress  {progressTasks.map(task => (
+    <div key={task.id}>{task.title}</div>
+  ))}
+</Item>
+
+<Item sx={{ gridColumn: '3', gridRow: '1 / 25' }}>Testing  {testingTasks.map(task => (
+    <div key={task.id}>{task.title}</div>
+  ))}</Item>
+
+<Item sx={{ gridColumn: '4', gridRow: '1 / 25' }}>Done 
+  {doneTasks.map(task => (
+    <div key={task.id}>{task.title}</div>))}</Item>
 </Box>
 
         </>
