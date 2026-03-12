@@ -18,14 +18,14 @@ import ProjectCard  from './components/ProjectCard '
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  return ( 
-     
+  return (    
       <Router>
        <Routes>
-         <Route path="/" element={<ProjectDetails />} />  
+         <Route path="/ProjectDetails" element={<ProjectDetails />} />  
+         <Route path="/Home" element={<Home/>}/> 
          <Route path="/Login" element={<Login/>}/> 
            {/* <Route path="/ProjectDetails" element={<ProjectDetails/>}/> */}
-             <Route path="/ProjectMain" element={<ProjectMain/>}/>
+             <Route path="/" element={<ProjectMain/>}/>
              {/* <Route path="/AddProject" element={<AddProject/>}/> */}
              {/* <Route path="/CangeStatusTask" element={<CangeStatusTask/>}/>
              <Route path="/CreateProject" element={<CreateProject/>}/>

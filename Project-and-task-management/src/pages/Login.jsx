@@ -13,7 +13,6 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(false);
 
   const handleLogin = () => {
-    // כאן אפשר לקרוא API להזדהות
     console.log({ email, password, rememberMe });
   };
 
@@ -29,42 +28,32 @@ const Login = () => {
       }}
     >
       <Typography level="h4" sx={{ mb: 2, textAlign: "center" }}>
-        התחברות
+        LOGIN
       </Typography>
-
       <Stack spacing={2}>
         <Input
-          placeholder="אימייל או טלפון"
+          placeholder="Email or phone"
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-
-        {/* אינפוט סיסמה */}
         <Input
-          placeholder="סיסמה"
+          placeholder="password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-
-        {/* שורה עם זכור אותי ולינק לשחזור סיסמה */}
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <Checkbox
             checked={rememberMe}
             onChange={(e) => setRememberMe(e.target.checked)}
             size="sm"
-            label="זכור אותי"
+            label="remember me"
           />
         </Box>
-
-        {/* כפתור התחברות */}
         <Button variant="solid" color="primary" onClick={handleLogin}>
-          התחבר
-        </Button>
-
-        {/* לינק להרשמה */}
-        
+          Log in
+        </Button>        
       </Stack>
     </Box>
   );
