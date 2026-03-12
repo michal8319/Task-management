@@ -1,5 +1,8 @@
 import { Card, CardContent, Typography, Button } from "@mui/material";
 import { deleteProject, updateProject } from "../store/ProjectSlice";
+import DeleteProject from "./DeleteProject";
+import UpdateProject from "./UpdateProject";
+
 
 const ProjectCard = ({ project }) => {
   return (

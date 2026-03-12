@@ -1,10 +1,8 @@
-import Button from '@mui/joy/Button';
-import Add from '@mui/icons-material/Add';
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";import Add from '@mui/icons-material/Add';
 import { useSelector } from "react-redux";
-import ProjectCard from '../components/ProjectCard ';
+import ProjectCard from '../components/ProjectCard';
 const ProjectMain=()=>{
-const projects = useSelector((state) => state.projects.projects || []);
+const projects = useSelector((state) => state.projects|| []);
  return(
    <>
    <div>
