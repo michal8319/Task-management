@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import { deleteTask } from "../store/TaskSlice"
+import { deleteTask } from "../store/TasksSlice"
 import { Button } from "@mui/material";
 
 const DeleteTask=({id})=>{

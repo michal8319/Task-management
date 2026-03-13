@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import DeleteTask from "./DeleteTask";
 import UpdateTask from "./UpdateTask";
-import ChangeStatusTask from "./ChangeStatusTask";
+import ChangeStatusTask from "./ChangStatusTask";
 
 const TaskCard = ({ task }) => {
 

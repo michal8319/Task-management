@@ -8,10 +8,12 @@ import Typography from "@mui/joy/Typography";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { login } from "../store/UserSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();  
   const user = useSelector((state) => state.user);
 
   const { register, handleSubmit } = useForm({defaultValues: {username: "",password: "",rememberMe: false}});
@@ -23,6 +25,7 @@ const Login = () => {
         localStorage.setItem("isLogged", "true");
       }
       alert("Login successful");
+      navigate("/ProjectMain");   
     } else {
       alert("Wrong username or password");
     }

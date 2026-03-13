@@ -1,44 +1,87 @@
 import { useDispatch } from "react-redux";
-import { Button, TextField } from "@mui/material";
+import { useForm } from "react-hook-form";
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions
+} from "@mui/material";
 import { useState } from "react";
+import { updateProject } from "../store/ProjectSlice";
 
 const UpdateProject = ({ project }) => {
 
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
 
-  const [name, setName] = useState(project.name);
-  const [description, setDescription] = useState(project.description);
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      name: project.name,
+      description: project.description
+    }
+  });
 
-  const handleUpdate = () => {
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const onSubmit = (data) => {
 
     dispatch(updateProject({
       id: project.id,
-      name: name,
-      description: description
+      name: data.name,
+      description: data.description
     }));
 
+    handleClose();
   };
 
   return (
-    <div>
-
-      <TextField
-        label="Project name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-
-      <TextField
-        label="Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-
-      <Button variant="outlined" onClick={handleUpdate}>
+    <>
+      <Button variant="outlined" onClick={handleOpen}>
         Update
       </Button>
 
-    </div>
+      <Dialog open={open} onClose={handleClose}>
+
+        <DialogTitle>Update Project</DialogTitle>
+
+        <form onSubmit={handleSubmit(onSubmit)}>
+
+          <DialogContent>
+
+            <TextField
+              label="Project name"
+              {...register("name", { required: true })}
+              fullWidth
+              sx={{ marginBottom: 2 }}
+            />
+
+            <TextField
+              label="Description"
+              {...register("description")}
+              fullWidth
+            />
+
+          </DialogContent>
+
+          <DialogActions>
+
+            <Button onClick={handleClose}>
+              Cancel
+            </Button>
+
+            <Button type="submit" variant="contained">
+              Save
+            </Button>
+
+          </DialogActions>
+
+        </form>
+
+      </Dialog>
+    </>
   );
 };
 

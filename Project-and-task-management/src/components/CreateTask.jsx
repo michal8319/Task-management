@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { Button, TextField } from "@mui/material";
-import { addTask } from "../store/TaskSlice";
+import { addTask } from "../store/TasksSlice";
 import { useForm } from "react-hook-form";
 import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";

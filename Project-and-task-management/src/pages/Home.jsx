@@ -1,12 +1,22 @@
 import Button from '@mui/joy/Button';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-const Home=()=>{
-   return(
-    <>   
-      <Button endDecorator={<KeyboardArrowRight />} color="success">Login</Button>
+import { useNavigate } from "react-router-dom";
+
+const Home = () => {
+
+  const navigate = useNavigate();
+
+  return (
+    <>
+      <Button
+        endDecorator={<KeyboardArrowRight />}
+        color="success"
+        onClick={() => navigate("/login")}
+      >
+        Login
+      </Button>
     </>
-   )
-}
-export default Home 
+  );
+};
 
-
+export default Home;
