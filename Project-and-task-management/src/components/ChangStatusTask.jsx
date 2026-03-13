@@ -24,7 +24,7 @@ const ChangeStatusTask = ({ task }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
 
-      <Select defaultValue={task.status} onChange={(event, value) => setValue("status", value)}>
+      <Select size="sm" defaultValue={task.status} onChange={(event,value)=>setValue("status",value)}>
         <Option value="Backlog">Backlog</Option>
         <Option value="In Progress">In Progress</Option>
         <Option value="In Review">In Review</Option>

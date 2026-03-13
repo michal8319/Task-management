@@ -60,6 +60,16 @@ const ProjectDetails=()=>{
         <>
       <Box sx={{fontSize: "2rem",fontWeight: "bold",textAlign: "center",mt: 2,mb: 4}}>TASKS</Box>
       
+      <Box
+  sx={{
+    display: "grid",
+    gridTemplateColumns: "repeat(4, 1fr)",
+    gap: 2,
+    width: "100%",
+    padding: 2
+  }}
+></Box>
+      
       <Box sx={{ mx: 'auto', width: 200 }}></Box>
     
       <Box sx={{display: "grid",gridTemplateColumns: "1fr 1fr 1fr 1fr", width: "100vw",height: "80vh",gap:2}}>
