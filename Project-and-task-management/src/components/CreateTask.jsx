@@ -1,17 +1,25 @@
 import { useDispatch } from "react-redux";
-import { Button, TextField } from "@mui/material";
-import { addTask } from "../store/TasksSlice";
 import { useForm } from "react-hook-form";
-import Select from "@mui/joy/Select";
-import Option from "@mui/joy/Option";
-import Input from "@mui/joy/Input";
-import Stack from "@mui/joy/Stack";
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Select,
+  MenuItem
+} from "@mui/material";
+import { useState } from "react";
+import { addTask } from "../store/TasksSlice";
 
-const CreateTask = () => {
+const CreateTask = ({projectId}) => {
 
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
 
-  const {register,handleSubmit,setValue,formState: { errors }} = useForm({defaultValues: {
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm({
+    defaultValues: {
       title: "",
       description: "",
       status: "Backlog",
@@ -20,52 +28,107 @@ const CreateTask = () => {
     }
   });
 
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const onSubmit = (data) => {
-    dispatch(addTask({id: Date.now(),...data}));
+    dispatch(addTask({
+        id: Date.now(),
+        projectId:projectId,
+        ...data
+      }));
+
+    handleClose();
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <>
+     <Button variant="contained" onClick={handleOpen} sx={{ mb: 2 }}>
+  Create Task
+</Button>
 
-      <TextField
-        label="Title"
-        {...register("title",{
-          required: "Title is required",
-          minLength: {
-            value: 3,
-            message: "Title must be at least 3 characters"
-          }
-        })}
-        error={!!errors.title}
-        helperText={errors.title?.message}
-      />
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
 
-      <TextField label="Description"{...register("description", {required: "Description is required"})}
-        error={!!errors.description}
-        helperText={errors.description?.message}
-      />
+        <DialogTitle>Create Task</DialogTitle>
 
-      <Select defaultValue="Backlog" onChange={(event, value) => setValue("status", value)}>
-        <Option value="Backlog">Backlog</Option>
-        <Option value="In Progress">In Progress</Option>
-        <Option value="In Review">In Review</Option>
-        <Option value="Done">Done</Option>
-      </Select>
+        <form onSubmit={handleSubmit(onSubmit)}>
 
-      <Select defaultValue="low" onChange={(event, value) => setValue("priority", value)}>
-        <Option value="low">Low</Option>
-        <Option value="medium">Medium</Option>
-        <Option value="high">High</Option>
-      </Select>
+          <DialogContent>
 
-      <Stack spacing={1.5} sx={{ minWidth: 300 }}>
-        <Input type="date"{...register("deadline", {required: "Deadline is required"})}/>
-      </Stack>
+            <TextField
+              label="Title"
+              {...register("title", {
+                required: "Title is required",
+                minLength: {
+                  value: 3,
+                  message: "Title must be at least 3 characters"
+                }
+              })}
+              error={!!errors.title}
+              helperText={errors.title?.message}
+              fullWidth
+              sx={{ mb: 2 }}
+            />
 
-      <Button type="submit" variant="outlined">Create</Button>
+            <TextField
+              label="Description"
+              {...register("description", {
+                required: "Description is required"
+              })}
+              error={!!errors.description}
+              helperText={errors.description?.message}
+              fullWidth
+              sx={{ mb: 2 }}
+            />
 
-    </form>
+            <Select
+              defaultValue="Backlog"
+              fullWidth
+              sx={{ mb: 2 }}
+              onChange={(e) => setValue("status", e.target.value)}
+            >
+              <MenuItem value="Backlog">Backlog</MenuItem>
+              <MenuItem value="In Progress">In Progress</MenuItem>
+              <MenuItem value="In Review">In Review</MenuItem>
+              <MenuItem value="Done">Done</MenuItem>
+            </Select>
+
+            <Select
+              defaultValue="low"
+              fullWidth
+              sx={{ mb: 2 }}
+              onChange={(e) => setValue("priority", e.target.value)}
+            >
+              <MenuItem value="low">Low</MenuItem>
+              <MenuItem value="medium">Medium</MenuItem>
+              <MenuItem value="high">High</MenuItem>
+            </Select>
+
+            <TextField
+              type="date"
+              {...register("deadline", { required: "Deadline is required" })}
+              fullWidth
+             
+            />
+
+          </DialogContent>
+
+          <DialogActions>
+
+            <Button onClick={handleClose}>
+              Cancel
+            </Button>
+
+            <Button type="submit" variant="contained">
+              Create
+            </Button>
+
+          </DialogActions>
+
+        </form>
+
+      </Dialog>
+    </>
   );
 };
-
 export default CreateTask;

@@ -20,7 +20,7 @@ const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     reset();
 
-    closeForm(); // סוגר את הטופס
+    closeForm();
   };
 
   return (

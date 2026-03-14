@@ -1,65 +1,114 @@
 import { useDispatch } from "react-redux";
-import { Button, TextField } from "@mui/material";
-import { updateTask } from "../store/TasksSlice";
 import { useForm } from "react-hook-form";
-import Select from "@mui/joy/Select";
-import Option from "@mui/joy/Option";
-import Input from "@mui/joy/Input";
-import Stack from "@mui/joy/Stack";
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Select,
+  MenuItem
+} from "@mui/material";
+import { useState } from "react";
+import { updateTask } from "../store/TasksSlice";
 
 const UpdateTask = ({ task }) => {
 
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
 
-  const {register,handleSubmit,setValue,formState: { errors }} = useForm({
-      defaultValues: {
+  const { register, handleSubmit, setValue } = useForm({
+    defaultValues: {
       title: task.title,
       description: task.description,
       priority: task.priority,
       deadline: task.deadline
-    }});
+    }
+  });
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const onSubmit = (data) => {
+
     dispatch(updateTask({
-        id: task.id,
-        title: data.title,
-        description: data.description,
-        status: task.status,
-        priority: data.priority,
-        deadline: data.deadline
-      }));};
+      id: task.id,
+      projectId:task.projectId,
+      title: data.title,
+      description: data.description,
+      status: task.status,
+      priority: data.priority,
+      deadline: data.deadline
+    }));
+
+    handleClose();
+  };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <>
+      <Button variant="outlined" onClick={handleOpen}>
+        Update
+      </Button>
 
-      <TextField label="Title"{...register("title", {required: "Title is required",
-          minLength: {
-            value: 3,
-            message: "Title must be at least 3 characters"
-          }
-        })}
-        error={!!errors.title}
-        helperText={errors.title?.message}
-      />
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
 
-      <TextField label="Description"{...register("description", {required: "Description is required"})}
-        error={!!errors.description}
-        helperText={errors.description?.message}
-      />
+        <DialogTitle>Update Task</DialogTitle>
 
-      <Select defaultValue={task.priority}onChange={(event, value) => setValue("priority", value)}>
-        <Option value="low">Low</Option>
-        <Option value="medium">Medium</Option>
-        <Option value="high">High</Option>
-      </Select>
+        <form onSubmit={handleSubmit(onSubmit)}>
 
-      <Stack spacing={1.5} sx={{ minWidth: 300 }}>
-        <Input type="date"{...register("deadline", {required: "Deadline is required"})}/>
-      </Stack>
+          <DialogContent>
 
-      <Button type="submit" variant="outlined">Update</Button>
+            <TextField
+              label="Title"
+              {...register("title", { required: true })}
+              fullWidth
+              sx={{ mb: 2 }}
+            />
 
-    </form>
+            <TextField
+              label="Description"
+              {...register("description")}
+              fullWidth
+              sx={{ mb: 2 }}
+            />
+
+            <Select
+              defaultValue={task.priority}
+              fullWidth
+              sx={{ mb: 2 }}
+              onChange={(e) => setValue("priority", e.target.value)}
+            >
+              <MenuItem value="low">Low</MenuItem>
+              <MenuItem value="medium">Medium</MenuItem>
+              <MenuItem value="high">High</MenuItem>
+            </Select>
+
+            <TextField
+              type="date"
+              {...register("deadline", { required: true })}
+              fullWidth
+              InputLabelProps={{ shrink: true }}
+            />
+
+          </DialogContent>
+
+          <DialogActions>
+
+            <Button onClick={handleClose}>
+              Cancel
+            </Button>
+
+            <Button type="submit" variant="contained">
+              Update
+            </Button>
+
+          </DialogActions>
+
+        </form>
+
+      </Dialog>
+    </>
   );
 };
 

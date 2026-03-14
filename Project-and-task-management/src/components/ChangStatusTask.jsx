@@ -1,11 +1,16 @@
-import { useDispatch } from "react-redux";
-import { Button } from "@mui/material";
 import { changeStatus } from "../store/TasksSlice";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import Select from "@mui/joy/Select";
-import Option from "@mui/joy/Option";
+import {Button,Dialog,DialogTitle,DialogContent,DialogActions} from "@mui/material";
+import { Select, MenuItem } from "@mui/material";
+import { useState } from "react";
 
 const ChangeStatusTask = ({ task }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+
+  const handleClose = () => setOpen(false);
 
   const dispatch = useDispatch();
 
@@ -22,18 +27,47 @@ const ChangeStatusTask = ({ task }) => {
     }));};
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-
-      <Select size="sm" defaultValue={task.status} onChange={(event,value)=>setValue("status",value)}>
-        <Option value="Backlog">Backlog</Option>
-        <Option value="In Progress">In Progress</Option>
-        <Option value="In Review">In Review</Option>
-        <Option value="Done">Done</Option>
-      </Select>
-
-      <Button type="submit" variant="outlined">Change status</Button>
-
-    </form>
+<>
+    <Button variant="outlined" onClick={handleOpen}>
+            Change status
+          </Button>
+    
+          <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
+    
+            <DialogTitle>Change status</DialogTitle>
+    
+            <form onSubmit={handleSubmit(onSubmit)}>
+    
+              <DialogContent>
+                  <Select
+                    defaultValue={task.status}
+                    onChange={(e) => setValue("status", e.target.value)}
+                    fullWidth
+                  >
+                    <MenuItem value="Backlog">Backlog</MenuItem>
+                    <MenuItem value="In Progress">In Progress</MenuItem>
+                    <MenuItem value="In Review">In Review</MenuItem>
+                    <MenuItem value="Done">Done</MenuItem>
+                  </Select>
+    
+              </DialogContent>
+    
+              <DialogActions>
+    
+                <Button onClick={handleClose}>
+                  Cancel
+                </Button>
+    
+                <Button type="submit" variant="contained">
+                  Update
+                </Button>
+    
+              </DialogActions>
+    
+            </form>
+    
+          </Dialog>
+      </>    
   );
 };
 

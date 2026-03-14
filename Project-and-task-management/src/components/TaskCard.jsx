@@ -1,69 +1,47 @@
-import Box from "@mui/material/Box";
-import { Typography, Button } from "@mui/material";
-import { useState } from "react";
+import { Card, CardContent, Typography, Box } from "@mui/material";
 import DeleteTask from "./DeleteTask";
 import UpdateTask from "./UpdateTask";
 import ChangeStatusTask from "./ChangStatusTask";
 
 const TaskCard = ({ task }) => {
 
-  const [showUpdate,setShowUpdate] = useState(false)
-  const [showStatus,setShowStatus] = useState(false)
-
   return (
-    <Box
+    <Card
       sx={{
-        border: "1px solid #ccc",
-        borderRadius: 2,
-        p: 1.5,
-        mb: 1.5,
-        backgroundColor: "#fff",
-        fontSize: "14px"
+        marginBottom: "10px",
+        width: "100%",
+        boxSizing: "border-box"
       }}
     >
+      <CardContent sx={{ p: 1.5, "&:last-child": { pb: 1.5 } }}>
 
-      <Typography fontWeight="bold">{task.title}</Typography>
+        <Typography variant="h6" sx={{ fontSize: "1rem" }}>
+          {task.title}
+        </Typography>
 
-      <Typography variant="body2">
-        {task.description}
-      </Typography>
+        <Typography sx={{ fontSize: "0.8rem" }}>
+          {task.description}
+        </Typography>
 
-      <Typography variant="caption">
-        Priority: {task.priority}
-      </Typography>
+        <Typography variant="body2" sx={{ fontSize: "0.75rem" }}>
+          Priority: {task.priority}
+        </Typography>
 
-      <Typography variant="caption" display="block">
-        Deadline: {task.deadline}
-      </Typography>
+        <Typography variant="body2" sx={{ fontSize: "0.75rem" }}>
+          Deadline: {task.deadline}
+        </Typography>
 
-      {/* כפתורים */}
-      <Box sx={{display:"flex",gap:1,mt:1,flexWrap:"wrap"}}>
-
-        <Button
-          size="small"
-          variant="outlined"
-          onClick={()=>setShowStatus(!showStatus)}
+        <Box
+          sx={{ display: "flex", gap: 0.5, marginTop: 0.5 }}
+          onClick={(e) => e.stopPropagation()}
         >
-          Status
-        </Button>
+          <ChangeStatusTask task={task} />
+          <UpdateTask task={task} />
+          <DeleteTask id={task.id} />
+        </Box>
 
-        <Button
-          size="small"
-          variant="outlined"
-          onClick={()=>setShowUpdate(!showUpdate)}
-        >
-          Edit
-        </Button>
-
-        <DeleteTask id={task.id}/>
-
-      </Box>
-
-      {showStatus && <ChangeStatusTask task={task}/>}
-
-      {showUpdate && <UpdateTask task={task}/>}
-
-    </Box>
+      </CardContent>
+    </Card>
   );
 };
 
