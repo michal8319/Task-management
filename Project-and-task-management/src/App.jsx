@@ -11,7 +11,7 @@ import DeleteProject from './components/DeleteProject'
 import DeleteTask from './components/DeleteTask'
 import UpdateProject from './components/UpdateProject'
 import UpdateTask from './components/UpdateTask'
-import ProjectCard  from './components/ProjectCard '
+import ProjectCard from './components/ProjectCard'
 import TaskCard from './components/TaskCard'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 

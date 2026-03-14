@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Typography, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import DeleteProject from "./DeleteProject";
 import UpdateProject from "./UpdateProject";
@@ -15,18 +15,37 @@ const ProjectCard = ({ project }) => {
     <Card
       onClick={goToProject}
       sx={{
-        marginBottom: "15px",
-        cursor: "pointer"
+        display: "flex",
+        cursor: "pointer",
+        borderRadius: 3,
+        transition: "0.2s",
+        "&:hover": {
+          boxShadow: 6,
+          transform: "translateY(-3px)"
+        }
       }}
     >
-      <CardContent>
 
-        <Typography variant="h6">
+      {/* פס צבע בצד */}
+      <Box
+        sx={{
+          width: "6px",
+          backgroundColor: "#2da44e" // צבע כמו GitHub
+        }}
+      />
+
+      <CardContent sx={{ flex: 1 }}>
+
+        <Typography variant="h6" sx={{ fontWeight: "bold" }}>
           {project.name}
         </Typography>
 
-        <Typography>
+        <Typography sx={{ mb: 1 }}>
           {project.description}
+        </Typography>
+
+        <Typography variant="body2" color="text.secondary">
+          Created: {project.createdAt}
         </Typography>
 
         <div onClick={(e) => e.stopPropagation()}>
@@ -35,6 +54,7 @@ const ProjectCard = ({ project }) => {
         </div>
 
       </CardContent>
+
     </Card>
   );
 };

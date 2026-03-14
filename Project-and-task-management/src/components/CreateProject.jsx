@@ -3,12 +3,12 @@ import { useForm } from "react-hook-form";
 import { TextField, Button } from "@mui/material";
 import { addProject } from "../store/ProjectSlice";
 
-const CreateProject = () => {
+
+const CreateProject = ({ closeForm }) => {
 
   const dispatch = useDispatch();
 
-  const { register, handleSubmit, reset } = useForm();
-
+const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const onSubmit = (data) => {
 
     dispatch(addProject({
@@ -19,6 +19,8 @@ const CreateProject = () => {
     }));
 
     reset();
+
+    closeForm(); // סוגר את הטופס
   };
 
   return (
@@ -27,15 +29,13 @@ const CreateProject = () => {
 
       <TextField
         label="Project Name"
-        {...register("name", { required: true })}
-        fullWidth
+      {...register("name", { required: "Project name is required" })}        fullWidth
         sx={{ marginBottom: 2 }}
       />
 
       <TextField
         label="Description"
-        {...register("description")}
-        fullWidth
+     {...register("description", { required: "Description is required" })}        fullWidth
         sx={{ marginBottom: 2 }}
       />
 

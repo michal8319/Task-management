@@ -1,21 +1,64 @@
-import { Button, Typography } from "@mui/material";import Add from '@mui/icons-material/Add';
+import { Button, Typography, Box } from "@mui/material";
+import Add from "@mui/icons-material/Add";
 import { useSelector } from "react-redux";
-import ProjectCard from '../components/ProjectCard '
-const ProjectMain=()=>{
-const projects = useSelector((state) => state.projects|| []);
- return(
-   <>
-   <div>
-     <Typography variant="h4" gutterBottom>
-        My Projects
-      </Typography>
+import { useState } from "react";
+import ProjectCard from "../components/ProjectCard";
+import CreateProject from "../components/CreateProject";
 
-    <Button startDecorator={<Add/>}>Add project</Button></div>
-    <div style={{ marginBottom: "20px" }}>
-   {projects.map((project) => (
-   <ProjectCard key={project.id} project={project} />
+const ProjectMain = () => {
+
+  const projects = useSelector((state) => state.projects || []);
+  const [showCreate,setShowCreate] = useState(false);
+
+  return (
+    <>
+
+      <Box sx={{
+        display:"flex",
+        justifyContent:"space-between",
+        alignItems:"center",
+        mb:4
+      }}>
+
+       <Typography
+  variant="h4"
+  sx={{ 
+    textAlign: "center",
+    mb: 4,
+    fontWeight: "bold"
+  }}
+>
+  My Projects
+</Typography>
+        <Button
+          variant="contained"
+          startIcon={<Add />}
+          onClick={()=>setShowCreate(true)}
+        >
+          Add project
+        </Button>
+
+      </Box>
+
+      {showCreate && (
+        <CreateProject closeForm={() => setShowCreate(false)} />
+      )}
+
+      {/* Grid של פרויקטים */}
+   <Box
+  sx={{
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)", 
+    gap: 3
+  }}
+>
+  {projects.map((project) => (
+    <ProjectCard key={project.id} project={project} />
   ))}
-</div>
+</Box>
+
     </>
-    )}
+  );
+};
+
 export default ProjectMain;
