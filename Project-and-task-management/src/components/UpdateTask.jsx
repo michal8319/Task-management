@@ -1,15 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import {
-  Button,
-  TextField,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Select,
-  MenuItem
-} from "@mui/material";
+import {Button,TextField,Dialog,DialogTitle,DialogContent,DialogActions,Select,MenuItem} from "@mui/material";
 import { useState } from "react";
 import { updateTask } from "../store/TasksSlice";
 
@@ -17,7 +8,6 @@ const UpdateTask = ({ task }) => {
 
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-
   const { register, handleSubmit, setValue } = useForm({
     defaultValues: {
       title: task.title,
@@ -29,9 +19,7 @@ const UpdateTask = ({ task }) => {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
   const onSubmit = (data) => {
-
     dispatch(updateTask({
       id: task.id,
       projectId:task.projectId,
@@ -41,15 +29,12 @@ const UpdateTask = ({ task }) => {
       priority: data.priority,
       deadline: data.deadline
     }));
-
     handleClose();
   };
 
   return (
     <>
-      <Button variant="outlined" onClick={handleOpen}>
-        Update
-      </Button>
+      <Button variant="outlined" onClick={handleOpen}>Update</Button>
 
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
 
@@ -59,49 +44,25 @@ const UpdateTask = ({ task }) => {
 
           <DialogContent>
 
-            <TextField
-              label="Title"
-              {...register("title", { required: true })}
-              fullWidth
-              sx={{ mb: 2 }}
-            />
+            <TextField label="Title"{...register("title", { required: true })}fullWidth sx={{ mb: 2 }}/>
 
-            <TextField
-              label="Description"
-              {...register("description")}
-              fullWidth
-              sx={{ mb: 2 }}
-            />
+            <TextField label="Description"{...register("description")}fullWidth sx={{ mb: 2 }}/>
 
-            <Select
-              defaultValue={task.priority}
-              fullWidth
-              sx={{ mb: 2 }}
-              onChange={(e) => setValue("priority", e.target.value)}
-            >
+            <Select defaultValue={task.priority}fullWidth sx={{ mb: 2 }}onChange={(e) => setValue("priority", e.target.value)}>
               <MenuItem value="low">Low</MenuItem>
               <MenuItem value="medium">Medium</MenuItem>
               <MenuItem value="high">High</MenuItem>
             </Select>
 
-            <TextField
-              type="date"
-              {...register("deadline", { required: true })}
-              fullWidth
-              InputLabelProps={{ shrink: true }}
-            />
+            <TextField type="date"{...register("deadline", { required: true })}fullWidth InputLabelProps={{ shrink: true }}/>
 
           </DialogContent>
 
           <DialogActions>
 
-            <Button onClick={handleClose}>
-              Cancel
-            </Button>
+            <Button onClick={handleClose}>Cancel</Button>
 
-            <Button type="submit" variant="contained">
-              Update
-            </Button>
+            <Button type="submit" variant="contained">Update</Button>
 
           </DialogActions>
 

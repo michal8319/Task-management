@@ -10,16 +10,13 @@ const CreateProject = ({ closeForm }) => {
 
 const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const onSubmit = (data) => {
-
     dispatch(addProject({
       id: Date.now(),
       name: data.name,
       description: data.description,
       createdAt: new Date().toISOString()
     }));
-
     reset();
-
     closeForm();
   };
 

@@ -9,14 +9,8 @@ const DeleteTask=({id})=>{
     }
     return(
         <>
-            <Button
-            size="small"
-            variant="outlined"
-            color="error"
-            onClick={handleDelete}
-            >
-            Delete
-            </Button>        </>
+            <Button size="small"variant="outlined"color="error"onClick={handleDelete}>Delete</Button>  
+        </>
     )
 }
 export default DeleteTask

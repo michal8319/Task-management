@@ -25,12 +25,10 @@ const ProjectCard = ({ project }) => {
         }
       }}
     >
-
-      {/* פס צבע בצד */}
       <Box
         sx={{
           width: "6px",
-          backgroundColor: "#2da44e" // צבע כמו GitHub
+          backgroundColor: "#2da44e" 
         }}
       />
 

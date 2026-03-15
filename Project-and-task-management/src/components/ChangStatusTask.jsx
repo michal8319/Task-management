@@ -28,9 +28,7 @@ const ChangeStatusTask = ({ task }) => {
 
   return (
 <>
-    <Button variant="outlined" onClick={handleOpen}>
-            Change status
-          </Button>
+    <Button variant="outlined" onClick={handleOpen}>Change status</Button>
     
           <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
     
@@ -39,11 +37,7 @@ const ChangeStatusTask = ({ task }) => {
             <form onSubmit={handleSubmit(onSubmit)}>
     
               <DialogContent>
-                  <Select
-                    defaultValue={task.status}
-                    onChange={(e) => setValue("status", e.target.value)}
-                    fullWidth
-                  >
+                  <Select defaultValue={task.status}onChange={(e) => setValue("status", e.target.value)} fullWidth>
                     <MenuItem value="Backlog">Backlog</MenuItem>
                     <MenuItem value="In Progress">In Progress</MenuItem>
                     <MenuItem value="In Review">In Review</MenuItem>
