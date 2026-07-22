@@ -1,16 +1,77 @@
-# React + Vite
+# Project & Task Management
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React single-page application for organizing projects and tracking their tasks through a Kanban-style workflow (Backlog → In Progress → In Review → Done). Built with Redux Toolkit for state management and MUI Joy for the UI.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Authentication** — simple login screen with an optional "remember me" session
+- **Projects** — create, update, and delete projects
+- **Tasks** — create, update, delete, and move tasks between statuses within a project
+- **Task metadata** — priority (low / medium / high) and deadline per task
+- **Client-side state** — all data lives in a Redux store, seeded with sample projects and tasks so the app is fully usable out of the box
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- [React 19](https://react.dev/) + [Vite](https://vitejs.dev/)
+- [Redux Toolkit](https://redux-toolkit.js.org/) / [React Redux](https://react-redux.js.org/)
+- [React Router](https://reactrouter.com/)
+- [React Hook Form](https://react-hook-form.com/)
+- [MUI Joy UI](https://mui.com/joy-ui/getting-started/)
+- ESLint
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+src/
+├── components/       # Reusable UI pieces (project/task cards, create/update/delete forms)
+├── pages/            # Route-level views (Home, Login, ProjectMain, ProjectDetails)
+├── store/            # Redux slices: projects, tasks, user
+├── App.jsx           # Route definitions
+└── main.jsx          # App entry point
+```
+
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) 18+
+- npm
+
+### Installation
+
+```bash
+git clone https://github.com/michal8319/Task-management.git
+cd Task-management/Project-and-task-management
+npm install
+```
+
+### Run in development
+
+```bash
+npm run dev
+```
+
+The app will be available at `http://localhost:5173`.
+
+### Build for production
+
+```bash
+npm run build
+npm run preview   # preview the production build locally
+```
+
+## Demo Login
+
+The app ships with a mock user for demo purposes — no backend required:
+
+| Username | Password |
+|---|---|
+| `michal and nechami` | `1234` |
+
+## Available Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the Vite dev server with hot reload |
+| `npm run build` | Build the app for production |
+| `npm run preview` | Preview the production build |
